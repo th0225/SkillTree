@@ -1,0 +1,5 @@
+﻿<Solution>
+  <Project Path="SkillTree.Browser/SkillTree.Browser.csproj" />
+  <Project Path="SkillTree.Desktop/SkillTree.Desktop.csproj" />
+  <Project Path="SkillTree/SkillTree.csproj" />
+</Solution>
