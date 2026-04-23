@@ -6,7 +6,7 @@ namespace SkillTree.Models;
 public enum SkillStatus
 {
     Locked,
-    Avaliable,
+    Available,
     Unlocked
 }
 
