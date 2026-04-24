@@ -72,7 +72,7 @@ public class SkillTreeService
             Description = "變數、迴圈、條件判斷",
             Category = SkillCategory.Programming,
             Status = SkillStatus.Available,
-            X = 300, Y = 50
+            X = 150, Y = 80
         };
 
         var oop = new SkillNode
@@ -81,7 +81,7 @@ public class SkillTreeService
             Description = "類別、繼承、介面",
             Category = SkillCategory.Programming,
             RequiredNodeIds = [csharpBasic.Id],
-            X = 300, Y = 180
+            X = 150, Y = 220
         };
 
         var avalonia = new SkillNode
@@ -90,7 +90,7 @@ public class SkillTreeService
             Description = "跨平台桌面應用",
             Category = SkillCategory.Programming,
             RequiredNodeIds = [oop.Id],
-            X = 300, Y = 310
+            X = 150, Y = 360
         };
 
         var tree = new SkillTreeData

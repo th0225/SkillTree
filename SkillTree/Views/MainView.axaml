@@ -6,10 +6,83 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SkillTree.Views.MainView"
              x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
-  </Design.DataContext>
+
+  <Grid ColumnDefinitions="*,280">
+
+    <Panel Grid.Column="0" Background="#1a1a2e">
+      <ItemsControl ItemsSource="{Binding Nodes}"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <Canvas HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"/>
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemContainerTheme>
+          <ControlTheme TargetType="ContentPresenter">
+            <Setter Property="Canvas.Left"
+                    Value="{Binding X, DataType=vm:SkillNodeViewModel}"/>
+            <Setter Property="Canvas.Top"
+                    Value="{Binding Y, DataType=vm:SkillNodeViewModel}"/>
+          </ControlTheme>
+        </ItemsControl.ItemContainerTheme>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="vm:SkillNodeViewModel">
+            <Button Width="120" Height="60"
+                    Command="{Binding $parent[ItemsControl].((vm:MainViewModel)DataContext).ToggleNodeCommand}"
+                    CommandParameter="{Binding}"
+                    CornerRadius="8"
+                    Background="#2d2d44"
+                    BorderBrush="#555577"
+                    BorderThickness="1.5">
+              <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="{Binding Name}"
+                          FontSize="13"
+                          FontWeight="SemiBold"
+                          Foreground="White"
+                          HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Status}"
+                          FontSize="10"
+                          Foreground="#aaaacc"
+                          HorizontalAlignment="Center"/>
+              </StackPanel>
+            </Button>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </Panel>
+
+    <Border Grid.Column="1"
+            Background="#12122a"
+            Padding="20">
+      <StackPanel Spacing="12">
+        <TextBlock Text="技能樹"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Foreground="White"/>
+
+        <TextBlock Text="點擊節點來解鎖技能"
+                   FontSize="12"
+                   Foreground="#888899"/>
+
+        <Separator/>
+
+        <StackPanel Spacing="6">
+          <TextBlock Text="進度"
+                     Foreground="#aaaacc"
+                     FontSize="13"/>
+          <TextBlock FontSize="12" Foreground="#888899">
+            <Run Text="{Binding UnlockedCount}"/>
+            <Run Text=" / "/>
+            <Run Text="{Binding TotalCount}"/>
+            <Run Text=" 已解鎖"/>
+          </TextBlock>
+        </StackPanel>
+
+      </StackPanel>
+    </Border>
+
+  </Grid>
 
 </UserControl>

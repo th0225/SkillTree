@@ -1,10 +1,9 @@
-using System.Net;
 using CommunityToolkit.Mvvm.ComponentModel;
 using SkillTree.Models;
 
 namespace SkillTree.ViewModels;
 
-public partial class SkillNodeViewModel(SkillNode model) : ObservableObject
+public partial class SkillNodeViewModel(SkillNode model) : ViewModelBase
 {
     private readonly SkillNode _model = model;
 

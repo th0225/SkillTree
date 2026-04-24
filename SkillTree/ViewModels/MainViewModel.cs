@@ -11,6 +11,8 @@ public partial class MainViewModel : ViewModelBase
 {
     private readonly SkillTreeService _service = new();
     private readonly SkillTreeData _currentTree;
+    public int UnlockedCount => Nodes.Count(n => n.IsUnlocked);
+    public int TotalCount => Nodes.Count;
 
     public ObservableCollection<SkillNodeViewModel> Nodes { get; } = [];
 
@@ -46,5 +48,7 @@ public partial class MainViewModel : ViewModelBase
         
         foreach (var vm in Nodes)
             vm.SyncFromModel();
+
+        OnPropertyChanged(nameof(UnlockedCount));
     }
 }
