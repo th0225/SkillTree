@@ -1,0 +1,15 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- 覆蓋 FluentTheme 的 pointerover 預設顏色 -->
+  <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{Binding $parent[Button].Background}"/>
+  </Style>
+
+  <!-- 覆蓋 FluentTheme 的 pressed 預設顏色 -->
+  <Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{Binding $parent[Button].Background}"/>
+    <Setter Property="Opacity" Value="0.8"/>
+  </Style>
+
+</Styles>

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using SkillTree.Models;
 using SkillTree.Services;
+using System;
 
 namespace SkillTree.ViewModels;
 
@@ -13,6 +14,7 @@ public partial class MainViewModel : ViewModelBase
     private readonly SkillTreeData _currentTree;
     public int UnlockedCount => Nodes.Count(n => n.IsUnlocked);
     public int TotalCount => Nodes.Count;
+    public event Action? NodesUpdated;
 
     public ObservableCollection<SkillNodeViewModel> Nodes { get; } = [];
 
@@ -50,5 +52,6 @@ public partial class MainViewModel : ViewModelBase
             vm.SyncFromModel();
 
         OnPropertyChanged(nameof(UnlockedCount));
+        NodesUpdated?.Invoke();
     }
 }

@@ -10,9 +10,15 @@
   <Grid ColumnDefinitions="*,280">
 
     <Panel Grid.Column="0" Background="#1a1a2e">
-      <ItemsControl ItemsSource="{Binding Nodes}"
+  
+      <!-- 連線畫在節點下面 -->
+      <Canvas Name="ConnectionCanvas"
               HorizontalAlignment="Stretch"
-              VerticalAlignment="Stretch">
+              VerticalAlignment="Stretch"/>
+
+      <ItemsControl ItemsSource="{Binding Nodes}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
         <ItemsControl.ItemsPanel>
           <ItemsPanelTemplate>
             <Canvas HorizontalAlignment="Stretch"
@@ -33,9 +39,9 @@
                     Command="{Binding $parent[ItemsControl].((vm:MainViewModel)DataContext).ToggleNodeCommand}"
                     CommandParameter="{Binding}"
                     CornerRadius="8"
-                    Background="#2d2d44"
-                    BorderBrush="#555577"
-                    BorderThickness="1.5">
+                    BorderThickness="1.5"
+                    Background="{Binding BackgroundBrush}"
+                    BorderBrush="{Binding BorderBrush}">
               <StackPanel HorizontalAlignment="Center">
                 <TextBlock Text="{Binding Name}"
                           FontSize="13"
@@ -51,7 +57,8 @@
           </DataTemplate>
         </ItemsControl.ItemTemplate>
       </ItemsControl>
-    </Panel>
+
+    </Panel>  
 
     <Border Grid.Column="1"
             Background="#12122a"
