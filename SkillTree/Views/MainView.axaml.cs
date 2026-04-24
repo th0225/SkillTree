@@ -37,16 +37,30 @@ public partial class MainView : UserControl
                 var from = vm.Nodes.FirstOrDefault(n => n.Id == reqId);
                 if (from == null) continue;
 
-                // 從節點中心底部連到目標節點中心頂部
-                var line = new Line
+                var x1 = from.X + 60;
+                var y1 = from.Y + 60;
+                var x2 = node.X + 60;
+                var y2 = node.Y;
+
+                // 貝茲曲線控制點
+                var cy1 = y1 + (y2 - y1) * 0.5;
+                var cy2 = y2 - (y2 - y1) * 0.5;
+
+                // 顏色跟著來源節點狀態走
+                var color = from.IsUnlocked
+                    ? Color.Parse("#44aa66")
+                    : Color.Parse("#555577");
+
+                var path = new Avalonia.Controls.Shapes.Path
                 {
-                    StartPoint = new Avalonia.Point(from.X + 60, from.Y + 60),
-                    EndPoint = new Avalonia.Point(node.X + 60, node.Y),
-                    Stroke = new SolidColorBrush(Color.Parse("#555577")),
-                    StrokeThickness = 1.5
+                    Stroke = new SolidColorBrush(color),
+                    StrokeThickness = 1.5,
+                    Fill = Brushes.Transparent,
+                    Data = Avalonia.Media.PathGeometry.Parse(
+                        $"M {x1} {y1} C {x1} {cy1}, {x2} {cy2}, {x2} {y2}")
                 };
 
-                canvas.Children.Add(line);
+                canvas.Children.Add(path);
             }
         }
     }
