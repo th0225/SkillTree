@@ -61,24 +61,46 @@
     </Panel>  
 
     <Border Grid.Column="1"
-            Background="#12122a"
-            Padding="20">
-      <StackPanel Spacing="12">
-        <TextBlock Text="技能樹"
-                   FontSize="20"
-                   FontWeight="Bold"
-                   Foreground="White"/>
+        Background="#12122a"
+        Padding="20">
+      <StackPanel Spacing="16">
 
-        <TextBlock Text="點擊節點來解鎖技能"
-                   FontSize="12"
-                   Foreground="#888899"/>
+        <TextBlock Text="技能樹"
+                  FontSize="20"
+                  FontWeight="Bold"
+                  Foreground="White"/>
 
         <Separator/>
 
+        <!-- 選取節點的詳細資訊 -->
+        <StackPanel Spacing="8"
+                    IsVisible="{Binding SelectedNode, Converter={x:Static ObjectConverters.IsNotNull}}">
+          <TextBlock Text="{Binding SelectedNode.Name}"
+                    FontSize="16"
+                    FontWeight="SemiBold"
+                    Foreground="White"/>
+          <TextBlock Text="{Binding SelectedNode.Description}"
+                    FontSize="12"
+                    Foreground="#aaaacc"
+                    TextWrapping="Wrap"/>
+          <TextBlock Text="{Binding SelectedNode.Status}"
+                    FontSize="12"
+                    Foreground="{Binding SelectedNode.BorderBrush}"/>
+        </StackPanel>
+
+        <!-- 沒選取時的提示 -->
+        <TextBlock Text="點擊節點查看詳細資訊"
+                  FontSize="12"
+                  Foreground="#888899"
+                  IsVisible="{Binding SelectedNode, Converter={x:Static ObjectConverters.IsNull}}"/>
+
+        <Separator/>
+
+        <!-- 進度統計 -->
         <StackPanel Spacing="6">
           <TextBlock Text="進度"
-                     Foreground="#aaaacc"
-                     FontSize="13"/>
+                    Foreground="#aaaacc"
+                    FontSize="13"/>
           <TextBlock FontSize="12" Foreground="#888899">
             <Run Text="{Binding UnlockedCount}"/>
             <Run Text=" / "/>
@@ -89,7 +111,6 @@
 
       </StackPanel>
     </Border>
-
   </Grid>
 
 </UserControl>

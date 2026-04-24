@@ -51,6 +51,7 @@ public partial class MainViewModel : ViewModelBase
         foreach (var vm in Nodes)
             vm.SyncFromModel();
 
+        SelectedNode = nodeVm;
         OnPropertyChanged(nameof(UnlockedCount));
         NodesUpdated?.Invoke();
     }
